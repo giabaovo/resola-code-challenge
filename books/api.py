@@ -1,6 +1,7 @@
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.parsers import MultiPartParser, FormParser
 
 from django_filters.rest_framework import DjangoFilterBackend
 
@@ -25,6 +26,7 @@ class BookCreateAPI(CreateAPIView):
     serializer_class = BookSerializer
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
+    parser_classes = (MultiPartParser, FormParser)
 
 
 class GetBookByIdAPI(RetrieveAPIView):
@@ -38,6 +40,7 @@ class UpdateBook(UpdateAPIView):
     serializer_class = BookSerializer
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
+    parser_classes = (MultiPartParser, FormParser)
 
 class DeleteBook(DestroyAPIView):
     # API delete book by Id
